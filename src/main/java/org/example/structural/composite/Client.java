@@ -22,5 +22,7 @@ public class Client {
 
         root.showDetails();
         System.out.println("Total size: " + root.getSize() + "KB");
+        System.out.println("Parent of Pictures: " + pictures.getParent().getName());
+        System.out.println("Parent of Music: " + music.getParent().getName());
     }
 }

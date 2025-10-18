@@ -3,6 +3,7 @@ package org.example.structural.composite;
 public class File implements FileSystemComponent{
     private String name;
     private long size;
+    private Folder parent;
 
     public File(String name, long size){
         this.name = name;
@@ -17,5 +18,15 @@ public class File implements FileSystemComponent{
     @Override
     public long getSize() {
         return this.size;
+    }
+
+    @Override
+    public Folder getParent() {
+        return parent;
+    }
+
+    @Override
+    public void setParent(Folder parent) {
+        this.parent = parent;
     }
 }

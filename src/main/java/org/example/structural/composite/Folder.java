@@ -6,17 +6,25 @@ import java.util.List;
 public class Folder implements FileSystemComponent{
     private String name;
     private List<FileSystemComponent> children = new ArrayList<>();
+    private Folder parent;
 
     public Folder(String name){
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void add(FileSystemComponent component){
         children.add(component);
+        component.setParent(this);
     }
 
     public void remove(FileSystemComponent component){
-        children.remove(component);
+        if(children.remove(component)){
+            component.setParent(null);
+        }
     }
 
     @Override
@@ -34,5 +42,15 @@ public class Folder implements FileSystemComponent{
             totalSize += child.getSize();
         }
         return totalSize;
+    }
+
+    @Override
+    public Folder getParent() {
+        return parent;
+    }
+
+    @Override
+    public void setParent(Folder parent) {
+        this.parent = parent;
     }
 }
