@@ -1,0 +1,26 @@
+package org.example.structural.composite;
+
+public class Client {
+    public static void main(String[] args) {
+        File file1 = new File("resume.pdf", 100);
+        File file2 = new File("photo.png", 200);
+        File file3 = new File("song.mp3", 5000);
+
+        Folder documents = new Folder("Documents");
+        documents.add(file1);
+
+        Folder pictures = new Folder("Pictures");
+        pictures.add(file2);
+
+        Folder music = new Folder("Music");
+        music.add(file3);
+
+        Folder root = new Folder("Root");
+        root.add(documents);
+        root.add(pictures);
+        root.add(music);
+
+        root.showDetails();
+        System.out.println("Total size: " + root.getSize() + "KB");
+    }
+}
