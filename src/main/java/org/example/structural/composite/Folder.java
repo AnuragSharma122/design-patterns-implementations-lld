@@ -1,5 +1,8 @@
 package org.example.structural.composite;
 
+import org.example.behavioral.strategy.CompressionStrategy;
+import org.example.behavioral.strategy.NoCompression;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,7 @@ public class Folder implements FileSystemComponent{
     private String name;
     private List<FileSystemComponent> children = new ArrayList<>();
     private Folder parent;
+    private CompressionStrategy compressionStrategy = new NoCompression();;
 
     public Folder(String name){
         this.name = name;
@@ -41,7 +45,7 @@ public class Folder implements FileSystemComponent{
         for(FileSystemComponent child : children){
             totalSize += child.getSize();
         }
-        return totalSize;
+        return this.compressionStrategy.compress(totalSize);
     }
 
     @Override
@@ -52,5 +56,10 @@ public class Folder implements FileSystemComponent{
     @Override
     public void setParent(Folder parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public void setCompressionStrategy(CompressionStrategy compressionStrategy) {
+        this.compressionStrategy = compressionStrategy;
     }
 }

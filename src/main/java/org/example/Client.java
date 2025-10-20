@@ -1,4 +1,9 @@
-package org.example.structural.composite;
+package org.example;
+
+import org.example.behavioral.strategy.RarCompression;
+import org.example.behavioral.strategy.ZipCompression;
+import org.example.structural.composite.File;
+import org.example.structural.composite.Folder;
 
 public class Client {
     public static void main(String[] args) {
@@ -24,5 +29,12 @@ public class Client {
         System.out.println("Total size: " + root.getSize() + "KB");
         System.out.println("Parent of Pictures: " + pictures.getParent().getName());
         System.out.println("Parent of Music: " + music.getParent().getName());
+
+        // Strategy pattern
+        System.out.println("Documents folder size before compression: " + documents.getSize() + "KB");
+        documents.setCompressionStrategy(new ZipCompression());
+        System.out.println("Documents folder size after ZIP compression: " + documents.getSize() + "KB");
+        documents.setCompressionStrategy(new RarCompression());
+        System.out.println("Documents folder size after RAR compression: " + documents.getSize() + "KB");
     }
 }

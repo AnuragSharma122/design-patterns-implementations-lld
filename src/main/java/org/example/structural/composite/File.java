@@ -1,9 +1,13 @@
 package org.example.structural.composite;
 
+import org.example.behavioral.strategy.CompressionStrategy;
+import org.example.behavioral.strategy.NoCompression;
+
 public class File implements FileSystemComponent{
     private String name;
     private long size;
     private Folder parent;
+    private CompressionStrategy compressionStrategy = new NoCompression();
 
     public File(String name, long size){
         this.name = name;
@@ -12,12 +16,12 @@ public class File implements FileSystemComponent{
 
     @Override
     public void showDetails() {
-        System.out.println("File: "+ this.name + " ("+ this.size + " KB)");
+        System.out.println("File: "+ this.name + " Compression: " +this.compressionStrategy.getName() + " ("+ this.size + " KB)");
     }
 
     @Override
     public long getSize() {
-        return this.size;
+        return this.compressionStrategy.compress(this.size);
     }
 
     @Override
@@ -28,5 +32,10 @@ public class File implements FileSystemComponent{
     @Override
     public void setParent(Folder parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public void setCompressionStrategy(CompressionStrategy compressionStrategy) {
+        this.compressionStrategy = compressionStrategy;
     }
 }
