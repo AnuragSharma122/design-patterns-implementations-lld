@@ -1,4 +1,4 @@
-package org.example.behavioral.strategy;
+package org.example.behavioral.strategy.compression;
 
 public interface CompressionStrategy {
     long compress(long originalSize);
